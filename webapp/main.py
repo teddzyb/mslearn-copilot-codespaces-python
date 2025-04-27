@@ -35,3 +35,18 @@ def generate(body: Body):
     """
     string = base64.b64encode(os.urandom(64))[:body.length].decode('utf-8')
     return {'token': string}
+
+@app.get('/cities/{country}')
+def get_cities(country: str):
+    """
+    Return a list of cities for a given country. Example GET request:
+
+    /cities/{country}
+    """
+    cities_data = {
+        "USA": ["New York", "Los Angeles", "Chicago"],
+        "Canada": ["Toronto", "Vancouver", "Montreal"],
+        "France": ["Paris", "Lyon", "Marseille"],
+        "Spain": ["Madrid", "Barcelona", "Valencia"],
+    }
+    return {"country": country, "cities": cities_data.get(country, [])}
